@@ -15,21 +15,26 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/person/")
+@RequestMapping("/person")
 public class PersonController {
 
     private final PersonService personService;
 
-    @GetMapping("page")
+    @GetMapping("index")
+    public String testing () {
+        return "index";
+    }
+
+    @GetMapping("/page")
     public String getAllPersons (Model model) {
         List<Person> personList = personService.fetchPersons();
         model.addAttribute("persons", personList);
         return "person_page";
     }
 
-    @PostMapping("page")
-    public String addPerson(@ModelAttribute Person person, Model model) {
-        model.addAttribute("personAttr", person);
+    @PostMapping("/page")
+    public String addPerson(@ModelAttribute("person") Person person) {
+//        model.addAttribute("person", person);
         personService.addPerson(person);
         return "person_page";
     }
