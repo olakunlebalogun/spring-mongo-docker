@@ -1,13 +1,20 @@
 package com.olakunle.entities;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(value = "product")
+//@Document(collection = "product")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
+    @Id
+    private Long id;
     private String productName;
-    private UUID ISBN;  // TODO: Make this look like the normal ISBN
-    private BigDecimal price;
-    private String productCompany;
-    private LocalDateTime purchasedDate;
+    private Double price;
+    private String description;
 }

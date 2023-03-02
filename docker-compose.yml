@@ -1,16 +1,16 @@
 version: "3.8"
 services:
-  mongo:
+  mongobase:
     image: mongo
-    container_name: mongodb
+    container_name: mongobase
     ports:
-      - "27017:27017"
+      - "27027:27017"
   spring-boot-mongodb:
     build: .
     container_name: spring-boot-app
     ports:
-      - "8080:8080"
+      - "5000:5000"
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/customer_product
+      - SPRING_DATA_MONGODB_URI=mongodb://mongobase:27017/product_db
     depends_on:
-      - mongo
+      - mongobase
