@@ -34,10 +34,15 @@ public class PersonController {
         return "person_page";
     }
 
+
+
     @PostMapping("/page")
-    public String addPerson(@ModelAttribute("person") Person person) {
+    public String addPerson(@ModelAttribute("person") Person person, Model model) {
 //        model.addAttribute("person", person);
         personService.addPerson(person);
-        return "person_page";
+        List<Person> personList = personService.fetchPersons();
+        model.addAttribute("persons", personList);
+        return "redirect:/person/page";
     }
+
 }
