@@ -68,6 +68,16 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
+            <div th:if="${param.submitted}">
+                <script th:inline="javascript">
+                    /* set the values of the form fields to an empty string */
+                    [[${person.id}]] = '';
+                    [[${person.firstname}]] = '';
+                    [[${person.lastname}]] = '';
+                    [[${person.occupation}]] = '';
+                    // add more fields as needed
+                </script>
+            </div>
         </div>
         <div class="col-md-3"></div>
     </div>
@@ -77,8 +87,8 @@
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-        <div class="present container" th:if="${not #lists.isEmpty(persons)}">
-            <table th:object="persons" class="table table-dark table-hover">
+        <div class="present container">
+            <table th:object="${persons}" class="table table-dark table-hover">
                 <thead>
                 <tr>
                     <th>Firstname</th>
@@ -92,16 +102,7 @@
                     <td th:text="${person.getLastName()}">Doe</td>
                     <td th:text="${person.getOccupation()}">Doctor</td>
                 </tr>
-<!--                <tr th:remove="all">-->
-<!--                    <td th:text="${person.getFirstName()}">Mary</td>-->
-<!--                    <td th:text="${person.getLastName()}">Moe</td>-->
-<!--                    <td th:text="${person.getOccupation()}">Lawyer</td>-->
-<!--                </tr>-->
-<!--                <tr th:remove="all">-->
-<!--                    <td th:text="${person.getFirstName()}">July</td>-->
-<!--                    <td th:text="${person.getLastName()}">Dooley</td>-->
-<!--                    <td th:text="${person.getOccupation()}">Convict</td>-->
-<!--                </tr>-->
+
                 </tbody>
             </table>
         </div>

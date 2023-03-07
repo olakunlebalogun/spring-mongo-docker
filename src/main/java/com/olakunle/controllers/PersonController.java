@@ -27,6 +27,8 @@ public class PersonController {
 
     @GetMapping("/page")
     public String getAllPersons (Model model) {
+        Person pn = new Person();
+        model.addAttribute("person", pn);
         List<Person> personList = personService.fetchPersons();
         model.addAttribute("persons", personList);
         return "person_page";
