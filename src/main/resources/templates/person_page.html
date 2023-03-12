@@ -4,6 +4,8 @@
     <meta charset="UTF-8"/>
     <title>Home Page</title>
 <!--    <link rel="stylesheet" href="style.css">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" th:src="@{/webjars/bootstrap/5.3.0/css/bootstrap.css}">
 
@@ -17,8 +19,13 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6 container bg-dark">
+            <div class="mt-4 p-5 bg-primary text-white rounded">
+                <h1>Simple CRUD Project on Spring MVC</h1>
+                <p>This is just a sample project that demonstrates how basic CRUD operation is done in Spring MVC.</p>
+                <p>This project uses a Person object with attributes such as firstname, lastname and occupation. In the future we will use date of birth do certain operations</p>
+            </div>
             <form action="#" th:action="@{/person/page}" th:object="${person}" method="post">
-                <div class="mb-3 mt-3">
+                <div class="mb-3 mt-3" hidden="hidden">
                     <label for="id" class="form-label">ID:</label>
                     <input
                             type="text"
@@ -93,7 +100,9 @@
                 <tr>
                     <th>Firstname</th>
                     <th>Lastname</th>
-                    <th>Email</th>
+                    <th>Occupation</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -101,6 +110,8 @@
                     <td th:text="${person.getFirstName()}">John</td>
                     <td th:text="${person.getLastName()}">Doe</td>
                     <td th:text="${person.getOccupation()}">Doctor</td>
+                    <td><a href="#" th:href="@{'page/' + ${person.getId()} + '/update'}"><i class="bi bi-pencil-square"></i></a></td>
+                    <td><a href="#" th:href="@{'page/' + ${person.getId()} + '/delete'}"><i class="bi bi-trash-fill"></i></a></td>
                 </tr>
 
                 </tbody>

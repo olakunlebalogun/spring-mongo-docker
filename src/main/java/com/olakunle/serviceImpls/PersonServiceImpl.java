@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -24,7 +25,38 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public String addPerson(Person person) {
-        personRepository.save(person);
+        if(person.getId() == null) {
+            personRepository.save(person);
+        }
+        else {
+            Person fetchedPerson = personRepository.findById(person.getId()).get();
+            fetchedPerson.setOccupation(person.getOccupation());
+            fetchedPerson.setFirstName(person.getFirstName());
+            fetchedPerson.setLastName(person.getLastName());
+//            person.setId(fetchedPerson.getId());
+            personRepository.save(fetchedPerson);
+
+        }
+//        personRepository.save(person);
         return "Saved Successfully";
+    }
+
+    @Override
+    public Person getPersonById(Long id) {
+        Optional<Person> personOptional = personRepository.findById(id);
+        if(personOptional.isPresent()){
+            return personOptional.get();
+        }
+
+        return null; //  I don't know if this will make  sense, I guess we will find out.
+    }
+
+    @Override
+    public void deletePerson (Long id) {
+        if (personRepository.existsById(id))
+            personRepository.deleteById(id);
+        else {
+            throw new RuntimeException("Person with ID " + id + " does not exist");
+        }
     }
 }
